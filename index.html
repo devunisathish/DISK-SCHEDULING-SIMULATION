@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>OS Disk Management Simulator</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body>
+
+<div class="container-fluid">
+
+<h1 class="text-center mt-3">Operating System Disk Management Simulator</h1>
+
+<ul class="nav nav-tabs mt-4">
+
+<li class="nav-item">
+<a class="nav-link active" data-bs-toggle="tab" href="#structure">Disk Structure</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" data-bs-toggle="tab" href="#scheduling">Disk Scheduling</a>
+</li>
+
+</ul>
+
+<div class="tab-content">
+
+<!-- DISK STRUCTURE -->
+
+<div class="tab-pane fade show active" id="structure">
+
+<div class="row mt-4">
+
+<div class="col-md-8">
+
+<div id="disk3d"></div>
+
+</div>
+
+<div class="col-md-4">
+
+<h4>Disk Components</h4>
+
+<ul>
+
+<li>Platter</li>
+<li>Tracks</li>
+<li>Sectors</li>
+<li>Read/Write Head</li>
+<li>Cylinder</li>
+
+</ul>
+
+<p id="structureExplanation">
+Press Next to start learning disk structure
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- DISK SCHEDULING -->
+
+<div class="tab-pane fade" id="scheduling">
+
+<div class="row mt-4">
+
+<div class="col-md-6">
+
+<h4>Create Files</h4>
+
+<input class="form-control mb-2" id="filename" placeholder="Enter File Name">
+
+<input class="form-control mb-2" id="location" placeholder="Disk Track Location (0-199)">
+
+<button class="btn btn-primary" onclick="addFile()">Add File</button>
+
+<table class="table table-striped mt-3">
+
+<thead>
+
+<tr>
+<th>File Name</th>
+<th>Track Location</th>
+</tr>
+
+</thead>
+
+<tbody id="fileTable"></tbody>
+
+</table>
+
+</div>
+
+<div class="col-md-6">
+
+<h4>Scheduling Visualizer</h4>
+
+<select class="form-control mb-2" id="algorithm">
+
+<option>FCFS</option>
+<option>SSTF</option>
+<option>SCAN</option>
+<option>C-SCAN</option>
+
+</select>
+
+<button class="btn btn-success" onclick="startScheduling()">Start</button>
+
+<canvas id="scheduleCanvas" width="600" height="400"></canvas>
+<div id="seekCalc"></div>
+
+<p id="scheduleExplanation"></p>
+
+</div>
+<div class="container mt-4">
+
+<h3 class="text-center">Disk Scheduling Algorithm Comparison</h3>
+
+<div class="row">
+
+<div class="col-md-6">
+<h5>FCFS</h5>
+<canvas id="fcfsCanvas" width="450" height="250"></canvas>
+<div id="fcfsCalc"></div>
+</div>
+
+<div class="col-md-6">
+<h5>SSTF</h5>
+<canvas id="sstfCanvas" width="450" height="250"></canvas>
+<div id="sstfCalc"></div>
+</div>
+
+</div>
+
+<div class="row mt-4">
+
+<div class="col-md-6">
+<h5>SCAN</h5>
+<canvas id="scanCanvas" width="450" height="250"></canvas>
+<div id="scanCalc"></div>
+</div>
+
+<div class="col-md-6">
+<h5>C-SCAN</h5>
+<canvas id="cscanCanvas" width="450" height="250"></canvas>
+<div id="cscanCalc"></div>
+</div>
+
+</div>
+
+<div class="mt-4 text-center">
+
+<h4 id="bestAlgo"></h4>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- CONTROLS -->
+
+<div class="text-center mt-4">
+    <button onclick="startScheduling()" class="btn btn-success">Start</button>
+
+<button onclick="previousStep()" class="btn btn-secondary">Previous</button>
+
+<button onclick="nextStep()" class="btn btn-primary">Next</button>
+<button class="btn btn-warning mt-3" onclick="runComparison()">
+Compare Algorithms
+</button>
+
+<!--<button class="btn btn-secondary" onclick="previousStep()">Previous</button>
+
+<button class="btn btn-primary" onclick="nextStep()">Next</button> -->
+
+</div>
+
+
+</div>
+
+</div>
+
+<script src="main.js"></script>
+<script src="modules/disk3d.js"></script>
+<script src="modules/fileSystem.js"></script>
+<script src="modules/scheduler.js"></script>
+<script src="modules/visualizer.js"></script>
+
+</body>
+</html>
